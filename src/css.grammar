@@ -189,4 +189,6 @@ kw<term> { @specialize[@name={term}]<identifier, term> }
   "(" ")" "[" "]" "{" "}"
 }
 
+@external propSource cssHighlighting from "./highlight"
+
 @detectDelim
