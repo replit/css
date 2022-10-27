@@ -69,13 +69,18 @@ selector {
   PseudoClassSelector {
     selector? !attribute (":" | "::") (
       PseudoClassName { identifier } |
-      @specialize[@name=PseudoClassName]<callee, "lang" | "nth-child" | "nth-last-child" | "nth-of-type" | "dir"> ArgList<value+> |
-      PseudoClassName { callee } ArgList<selector>) } |
+      pseudoClassWithArg ArgList<value+> |
+      PseudoClassName { callee } ArgList<selector>)
+  } |
   IdSelector { selector? !attribute "#" IdName { identifier } } |
   AttributeSelector { selector? !attribute "[" AttributeName { identifier } (MatchOp value)? "]" } |
   ChildSelector { selector !structure ChildOp selector } |
   DescendantSelector { selector !structure descendantOp selector } |
   SiblingSelector { selector !structure SiblingOp selector }
+}
+
+pseudoClassWithArg {
+  @specialize[@name=PseudoClassName]<callee, "lang" | "nth-child" | "nth-last-child" | "nth-of-type" | "nth-last-of-type" | "nth-of-type" | "dir" | "host-context">
 }
 
 NumberLiteral {
